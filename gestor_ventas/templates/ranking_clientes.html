@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block navbar_title %}Ranking de Clientes{% endblock %}
+{% block title %}Ranking de Clientes{% endblock %}
+{% block content %}
+<h2 class="section-title">Clientes que más han comprado</h2>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card card-minimal p-4">
+      <h3 class="mb-3">Filtros</h3>
+      <form method="GET" class="row gx-3 align-items-end">
+        <div class="col">
+          <label class="form-label text-white">Desde</label>
+          <input type="date" class="form-control" name="desde" value="{{desde or ''}}">
+        </div>
+        <div class="col">
+          <label class="form-label text-white">Hasta</label>
+          <input type="date" class="form-control" name="hasta" value="{{hasta or ''}}">
+        </div>
+        <div class="col">
+          <label class="form-label text-white">Top</label>
+          <input type="number" class="form-control" name="top" value="{{top or 20}}" min="1">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-filter">Aplicar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card card-minimal p-4">
+      <h3 class="mb-3">Resultado</h3>
+      {% if ranking %}
+        <div class="table-responsive">
+          <table class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th>#</th><th>Cliente</th><th>DNI</th><th>Compras</th>
+                <th>Total (S/)</th><th>Primera compra</th><th>Última compra</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in ranking %}
+              <tr>
+                <td>{{loop.index}}</td><td>{{r[1] or '(sin nombre)'}}</td>
+                <td>{{r[2] or '(sin DNI)'}}</td><td>{{r[3]}}</td>
+                <td>{{"%.2f"|format(r[4])}}</td><td>{{r[5]}}</td><td>{{r[6]}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p>No hay datos para el filtro seleccionado.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

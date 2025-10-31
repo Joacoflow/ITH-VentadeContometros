@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Registrar Venta{% endblock %}
+{% block content %}
+<div class="card card-minimal p-4">
+  <h2 class="section-title">Registrar Venta</h2>
+  <form method="POST" action="{{ url_for('dashboard') }}" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label text-white">Descripción</label>
+      <input type="text" class="form-control" name="descripcion" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label text-white">Cliente</label>
+      <input type="text" class="form-control" name="cliente" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label text-white">DNI</label>
+      <input type="text" class="form-control" name="dni" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label text-white">Monto</label>
+      <input type="number" step="0.01" class="form-control" name="monto" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label text-white">Fecha</label>
+      <input type="date" class="form-control" name="fecha" required>
+    </div>
+    <div class="col-12">
+      <button type="submit" name="registrar" class="btn btn-primary">Registrar</button>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-clean">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
